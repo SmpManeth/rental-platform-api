@@ -13,16 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // 🟢 Add Sanctum + other API middlewares
-        $middleware->alias([
-            'stateful' => EnsureFrontendRequestsAreStateful::class,
-        ]);
 
-        $middleware->group('api', [
-            'stateful',           // Sanctum SPA/React-friendly auth
-            'throttle:api',       // API rate limiting
-            'bindings',           // Route model binding
-        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
